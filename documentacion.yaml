@@ -1,0 +1,126 @@
+swagger: '2.0'
+info:
+  title: API COFFE
+  description: API PARA COFFE
+  version: 0.0.1
+host: "restserver-nodejs-app.herokuapp.com"
+basePath: "/api/"
+schemes:
+- "https"
+- "http"
+
+paths:
+  /usuarios:
+    get:
+      tags:
+      - "Listar Usuarios"
+      summary: "Lista de Usuarios"
+      description: "Endpoint para listar todos los usuarios"
+      operationId: "usuarios"
+      produces:
+        - "application/json"
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          description: "Valor para limitar la cantidad de usuarios a mostrar"
+        - in: "query"
+          name: desde
+          type: integer
+          description: "Valor para indicar desde dónde comenzar a listar los usuarios"
+      responses:
+        "200":
+          description: "Operacion Realizada"
+          schema:
+            type: "array"
+            $ref: "#/definitions/Usuario"
+        "404":
+          description: "Solicitud no encontrada"
+  
+    post:
+      tags:
+        - "Crear un Usuario"
+      summary: "Crear un Usuario"
+      description: "Endpoint para crear un usuario"
+      operationId: "crearUsuario"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: Usuario
+          description: "Campos que se deben enviar para crear un usuario"
+          schema:
+            $ref: "#/definitions/Usuario"
+      responses:
+        "200":
+          description: "Operacion Realizada"
+          schema:
+            type: "array"
+            $ref: "#/definitions/Usuario"
+        "404":
+          description: "Solicitud no encontrada"
+
+  /usuarios/{id}:
+    put:
+      tags:
+        - "Actualizar un Usuario"
+      summary: "Actualizar un Usuario"
+      description: "Endpoint para actualizar un usuario"
+      operationId: "actualizarUsuario"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: id
+          required: true
+          description: "Campos que se deben enviar para actualuzar un usuario"
+          schema:
+            $ref: "#/definitions/Usuario"
+      responses:
+        "200":
+          description: "Operacion Realizada"
+          schema:
+            type: "array"
+            $ref: "#/definitions/Usuario"
+        "400":
+          description: "La Solicitud no se pudo ejecutar"
+
+    delete:
+      tags:
+        - "Eliminar un Usuario"
+      summary: "Eliminar un Usuario"
+      description: "Endpoint para eliminar un usuario"
+      operationId: "eliminarUsuario"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Operacion Realizada"
+          schema:
+            type: "array"
+            $ref: "#/definitions/Usuario"
+        "400":
+          description: "La Solicitud no se pudo ejecutar"
+
+
+
+definitions: 
+  Usuario:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+      nombre:
+        type: "string"
+      correo:
+        type: "string"
+      password:
+        type: "string"
+      img:
+        type: "string"
+      rol:
+        type: "string"
+      estado:
+        type: "boolean"
+      google:
+        type: "boolean"

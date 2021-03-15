@@ -70,12 +70,18 @@ const usuariosPatch = (req, res = response) => {
 const usuariosDelete = async (req, res = response) => {
   const { id } = req.params;
 
+  // INFO QUE VIENE DEL MIDLEWARE validarJWT
+  // const uid = req.uid;
+
   // Eliminar físicamente
   // const usuario = await Usuario.findByIdAndDelete(id);
 
   // Cambiar estado del usuario
   const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
+  // const usuarioAutenticado = req.usuario; INFORMACIón del USUARIO AUTENTICADO
 
+  // res.json({ usuario, uid });
+  // res.json({ usuario, usuarioAutenticado });
   res.json(usuario);
 };
 
